@@ -206,8 +206,12 @@ nav.scrolled {
   line-height: 1;
   -webkit-tap-highlight-color: transparent;
 }
+.floating-call-btn:hover {
+  animation-play-state: paused; 
+  background: #000; 
+  transform: scale(1.15) translateY(-5px);
+}
 
-/* ═══ HERO SLIDER ═══ */
 .hero {
   position: relative;
   height: 100vh;
@@ -395,6 +399,28 @@ nav.scrolled {
   50% {
     opacity: 1;
     width: 60px;
+  }
+}
+@keyframes constant-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  }
+  50% {
+    transform: scale(1.1); /* %10 büyüme */
+    box-shadow: 0 15px 35px rgba(37, 211, 102, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+  }
+}
+@keyframes icon-shake {
+  from {
+    transform: rotate(-10deg);
+  }
+  to {
+    transform: rotate(10deg);
   }
 }
 
@@ -729,9 +755,34 @@ footer {
   color: var(--gold);
   margin-bottom: 20px;
 }
+.floating-call-btn {
+  position: fixed;
+  bottom: 100px;
+  right: 25px;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  z-index: 9999;
+  text-decoration: none;
+  font-weight: 700;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
 
+  animation: constant-pulse 2s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.phone-holder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: icon-shake 0.5s infinite alternate; /* Simgede ekstra hafif titreme */
+}
 .footer-col a {
-  display: none;
+  display: block;
   text-decoration: none;
   color: var(--gray);
   font-size: 0.85rem;

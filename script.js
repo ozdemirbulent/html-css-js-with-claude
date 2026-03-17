@@ -257,7 +257,7 @@ const statsObserver = new IntersectionObserver(
   { threshold: 0.5 },
 );
 if (statsBar) statsObserver.observe(statsBar);
-const WHATSAPP_NUMBER = "905352681166";
+const WHATSAPP_NUMBER = "900000000000";
 
 const contactForm = document.getElementById("contactForm");
 const warningMessage = document.querySelector(".warning");
