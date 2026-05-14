@@ -16,7 +16,6 @@
 
   const banner = document.getElementById("cookieBanner");
 
-
   function showBanner() {
     banner.style.display = "";
     requestAnimationFrame(() =>
@@ -125,11 +124,15 @@
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 window.addEventListener("scroll", function () {
   const scrollTop = window.scrollY;
-  const docHeight = Math.max(1, document.documentElement.scrollHeight - document.documentElement.clientHeight);
+  const docHeight = Math.max(
+    1,
+    document.documentElement.scrollHeight -
+      document.documentElement.clientHeight,
+  );
   const scrollPercent = scrollTop / docHeight;
-  
+
   if (scrollTopBtn) {
-    scrollTopBtn.style.setProperty('--scroll-value', `${scrollPercent * 100}%`);
+    scrollTopBtn.style.setProperty("--scroll-value", `${scrollPercent * 100}%`);
     if (scrollTop > 300) {
       scrollTopBtn.classList.add("show");
     } else {
@@ -273,14 +276,27 @@ const WHATSAPP_NUMBER = "905352681166";
 const contactForm = document.getElementById("contactForm");
 const warningMessage = document.querySelector(".warning");
 const phoneInput = document.getElementById("f-tel");
+const adInput = document.getElementById("f-ad");
 
 if (contactForm) {
   contactForm.addEventListener("submit", handleSubmit);
 }
 
+if (adInput) {
+  adInput.addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/[0-9]/g, "");
+  });
+}
+
 if (phoneInput) {
   phoneInput.addEventListener("input", (e) => {
-    e.target.value = e.target.value.replace(/\D/g, "").slice(0, 11);
+    let val = e.target.value.replace(/\D/g, "").slice(0, 10);
+    let formatted = "";
+    if (val.length > 0) formatted += val.substring(0, 3);
+    if (val.length > 3) formatted += " " + val.substring(3, 6);
+    if (val.length > 6) formatted += " " + val.substring(6, 8);
+    if (val.length > 8) formatted += " " + val.substring(8, 10);
+    e.target.value = formatted;
   });
 }
 
@@ -324,19 +340,18 @@ function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
   const adSoyad = form.querySelector("#f-ad").value.trim();
-  const telefon = form.querySelector("#f-tel").value.replace(/\D/g, "").trim();
-  const eposta = form.querySelector("#f-mail").value.trim();
+  const telefon = form.querySelector("#f-tel").value.trim();
   const hizmet = form.querySelector("#f-hizmet").value;
   const mesaj = form.querySelector("#f-mesaj").value.trim();
   const btn = form.querySelector(".btn-submit");
   const consent = form.querySelector("#f-consent").checked;
 
-  if (!adSoyad || !telefon || !eposta || !hizmet || !mesaj) {
+  if (!adSoyad || !telefon || !hizmet || !mesaj) {
     setFormMessage("Lütfen tüm zorunlu alanları doldurun.", "error");
     return;
   }
 
-  if (telefon.length < 10) {
+  if (telefon.replace(/\D/g, "").length < 10) {
     setFormMessage("Telefon numarası en az 10 haneli olmalı.", "error");
     return;
   }
@@ -351,7 +366,6 @@ function handleSubmit(e) {
     "",
     `👤 *Ad Soyad:* ${adSoyad}`,
     `📞 *Telefon:* ${telefon}`,
-    `✉️ *E-Posta:* ${eposta || "-"}`,
     `🔧 *Hizmet:* ${hizmet}`,
     `💬 *Mesaj:* ${mesaj || "-"}`,
   ].join("\n");

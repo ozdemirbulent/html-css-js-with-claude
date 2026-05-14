@@ -282,7 +282,6 @@ nav.scrolled {
   margin-bottom: 20px;
   opacity: 0;
   animation: fadeUp 0.8s 0.3s forwards;
-  
 }
 
 .hero-title {
@@ -891,6 +890,20 @@ footer {
   gap: 12px;
 }
 
+.logo-footer {
+  height: 75px;
+  width: 100px;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}
+
+.logo-footer:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
 .footer-bottom p {
   font-size: 0.75rem;
   color: rgba(136, 136, 136, 0.5);
@@ -949,7 +962,10 @@ footer {
 
 /* ═══ SCROLL TOP BTN ═══ */
 .scrollTopBtn {
-  background: conic-gradient(var(--gold) var(--scroll-value, 0%), rgba(201, 168, 76, 0.15) var(--scroll-value, 0%));
+  background: conic-gradient(
+    var(--gold) var(--scroll-value, 0%),
+    rgba(201, 168, 76, 0.15) var(--scroll-value, 0%)
+  );
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -958,7 +974,10 @@ footer {
   padding: 0;
   border-radius: 50%;
   cursor: pointer;
-  transition: opacity 0.4s, visibility 0.4s, transform 0.3s;
+  transition:
+    opacity 0.4s,
+    visibility 0.4s,
+    transform 0.3s;
   opacity: 0;
   visibility: hidden;
   z-index: 90;
@@ -987,7 +1006,9 @@ footer {
   color: var(--gold);
   font-family: "DM Sans", sans-serif;
   font-size: 1.2rem;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .scrollTopBtn:hover {
@@ -1675,6 +1696,10 @@ iframe {
     padding: 7px 10px;
   }
 
+  .logo-footer {
+    height: 46px;
+  }
+
   .quick-contact-bar {
     right: 14px;
     bottom: 100px;
@@ -1755,6 +1780,10 @@ iframe {
 
   .hero-title {
     font-size: clamp(2.4rem, 11vw, 3.2rem);
+  }
+
+  .logo-footer {
+    height: 38px;
   }
 
   .hero-desc {

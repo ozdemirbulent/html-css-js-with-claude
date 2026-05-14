@@ -352,7 +352,7 @@
     <nav id="navbar" role="navigation" aria-label="Ana Navigasyon">
       <div
         class="logo"
-        onclick="window.location.href = 'index.html'"
+        onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
         role="link"
         aria-label="27 İstanbul Asansör Ana Sayfa"
       >
@@ -631,6 +631,12 @@
                   >info@27istanbulAsansor.com.tr</a
                 >
               </p>
+              <p
+                style="font-size: 0.75rem; color: var(--gold); margin-top: 6px"
+              >
+                * Kurumsal projeleriniz için lütfen e-posta ile iletişim
+                sağlayın.
+              </p>
             </div>
           </div>
           <div class="contact-item">
@@ -656,6 +662,7 @@
                 id="f-ad"
                 type="text"
                 required
+                pattern="^[^0-9]+$"
                 autocomplete="name"
                 placeholder=" "
               />
@@ -666,25 +673,14 @@
                 id="f-tel"
                 type="tel"
                 placeholder=" "
-                maxlength="11"
-                minlength="10"
+                maxlength="13"
                 inputmode="numeric"
-                pattern="[0-9]{10,11}"
+                pattern="[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}"
                 autocomplete="tel"
                 required
               />
               <label for="f-tel" class="floatingLabel">Telefon</label>
             </div>
-          </div>
-          <div class="form-group">
-            <input
-              id="f-mail"
-              type="email"
-              placeholder=" "
-              autocomplete="email"
-              required
-            />
-            <label for="f-mail" class="floatingLabel">E-Posta</label>
           </div>
           <div class="form-group">
             <label for="f-hizmet">Hizmet Türü</label>
@@ -727,15 +723,6 @@
     <footer role="contentinfo">
       <div class="footer-top">
         <div class="footer-brand">
-          <div
-            class="logo"
-            onclick="window.location.href = 'index.html'"
-            role="link"
-            aria-label="Ana Sayfa"
-          >
-            27 İstanbul
-            <span style="color: var(--gold)">Asansör</span>
-          </div>
           <p>
             Gaziantep'te 15 yıldır güvenli, kaliteli ve ekonomik asansör
             çözümleri sunuyoruz. Her projede mükemmeli hedefliyoruz.
@@ -783,6 +770,18 @@
         </nav>
       </div>
       <div class="footer-bottom">
+        <div
+          class="logo"
+          onclick="window.scrollTo({ top: 0, behavior: 'smooth' })"
+          role="link"
+          aria-label="Ana Sayfa"
+        >
+          <img
+            src="./images/logo.png"
+            alt="27 İstanbul Asansör Logosu"
+            class="logo-footer"
+          />
+        </div>
         <p>© 2026 27 İstanbul Asansör. Tüm hakları saklıdır.</p>
         <div class="footer-cert" aria-label="Sertifikalar">
           <span class="cert-badge">TSE Belgeli</span>
@@ -814,8 +813,5 @@
       </a>
     </div>
     <script src="script.js"></script>
-  </body>
-</html>
-
   </body>
 </html>
