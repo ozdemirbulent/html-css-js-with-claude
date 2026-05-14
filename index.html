@@ -57,7 +57,7 @@
         "name": "27 İstanbul Asansör",
         "description": "Gaziantep'te asansör kurulum, bakım, modernizasyon ve 7/24 arıza servisi. TSE belgeli, EN 81 uyumlu.",
         "url": "https://www.27istanbulasansor.com.tr/",
-        "telephone": "+900000000000",
+        "telephone": "+905352681166",
         "email": "info@27istanbul_Asansor.com.tr",
         "foundingDate": "2008",
         "priceRange": "₺₺",
@@ -152,7 +152,7 @@
             }
           ]
         },
-        "sameAs": ["https://wa.me/900000000000"]
+        "sameAs": ["https://wa.me/905352681166"]
       }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -215,7 +215,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <p class="modal-date">Son güncelleme: Ocak 2026</p>
+          <p class="modal-date">Son güncelleme: Nisan 2026</p>
 
           <h3>1. Veri Sorumlusu</h3>
           <p>
@@ -270,7 +270,7 @@
               >info@27istanbul_Asansor.com.tr</a
             >
             adresine veya
-            <a href="tel:+900000000000" class="modal-link">+90 535 268 11 66</a>
+            <a href="tel:+905352681166" class="modal-link">+90 535 268 11 66</a>
             numaralı telefona başvurabilirsiniz.
           </p>
         </div>
@@ -356,6 +356,11 @@
         role="link"
         aria-label="27 İstanbul Asansör Ana Sayfa"
       >
+        <img
+          src="./images/logo.png"
+          alt="27 İstanbul Asansör Logosu"
+          class="logo-img"
+        />
         <span>27 İstanbul</span>
         <span style="color: var(--gold)">Asansör</span>
       </div>
@@ -388,9 +393,9 @@
         <div class="slide slide-3"></div>
       </div>
       <div class="hero-content">
-        <p class="hero-tag">Gaziantep · Türkiye · Est. 2008</p>
+        <p class="hero-tag">Yüksekte Güvenin Zirvesi</p>
         <h1 class="hero-title">
-          Yüksekte<br /><span>Güvenin</span><br />Simgesi
+          Gaziantep Asansör<br /><span>Kurulum <br />Bakım </span>
         </h1>
         <p class="hero-desc">
           Kurulum, bakım ve modernizasyon hizmetleriyle<br />
@@ -399,6 +404,11 @@
         <div class="hero-btns">
           <a href="#hizmetler" class="btn-gold">Hizmetlerimiz</a>
           <a href="#iletisim" class="btn-outline">Teklif Al</a>
+        </div>
+        <div class="hero-trust" aria-label="Güven Göstergeleri">
+          <span class="trust-pill">15+ Yıl Deneyim</span>
+          <span class="trust-pill">TSE Belgeli</span>
+          <span class="trust-pill">7/24 Acil Servis</span>
         </div>
       </div>
       <div class="slide-dots" role="tablist" aria-label="Slayt Navigasyonu">
@@ -460,6 +470,24 @@
     >
       ↑
     </button>
+    <div class="quick-contact-bar" aria-label="Hızlı İletişim">
+      <a
+        class="quick-fab quick-fab--phone"
+        href="tel:+905352681166"
+        aria-label="Telefon ile hemen ara"
+      >
+        <i class="fas fa-phone" aria-hidden="true"></i>
+      </a>
+      <a
+        class="quick-fab quick-fab--wa"
+        href="https://wa.me/905352681166?text=Merhaba%2C%20teklif%20almak%20istiyorum."
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="WhatsApp ile yazın"
+      >
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      </a>
+    </div>
 
     <!-- ═══ HİZMETLER ═══ -->
     <section id="hizmetler" aria-labelledby="hizmetler-baslik">
@@ -580,14 +608,14 @@
               <label>Telefon</label>
               <p>
                 <a
-                  href="tel:+900000000000"
+                  href="tel:+905352681166"
                   style="color: inherit; text-decoration: none"
-                  >+90 (000) 000 00 00</a
+                  >+90 (535) 268 11 66</a
                 ><br />
                 <a
-                  href="tel:+900000000000"
+                  href="tel:+905424847927"
                   style="color: inherit; text-decoration: none"
-                  >+90 (000) 000 00 00</a
+                  >+90 (542) 484 79 27</a
                 >
               </p>
             </div>
@@ -617,8 +645,8 @@
           </div>
         </address>
         <form
+          id="contactForm"
           class="contact-form reveal reveal-delay-2"
-          onsubmit="handleSubmit(event)"
           aria-label="Teklif Talep Formu"
           novalidate
         >
@@ -639,6 +667,9 @@
                 type="tel"
                 placeholder=" "
                 maxlength="11"
+                minlength="10"
+                inputmode="numeric"
+                pattern="[0-9]{10,11}"
                 autocomplete="tel"
                 required
               />
@@ -657,7 +688,8 @@
           </div>
           <div class="form-group">
             <label for="f-hizmet">Hizmet Türü</label>
-            <select id="f-hizmet" style="border-radius: 5px">
+            <select id="f-hizmet" style="border-radius: 5px" required>
+              <option value="" selected disabled>Hizmet seçiniz</option>
               <option>Yeni Asansör Kurulumu</option>
               <option>Periyodik Bakım</option>
               <option>Arıza / Onarım</option>
@@ -666,15 +698,27 @@
             </select>
           </div>
           <div class="form-group">
-            <textarea id="f-mesaj" placeholder=" "></textarea>
+            <textarea
+              id="f-mesaj"
+              placeholder=" "
+              required
+              minlength="10"
+            ></textarea>
             <label for="f-mesaj" class="floatingLabel">Mesajınız</label>
           </div>
+          <label class="form-consent">
+            <input id="f-consent" type="checkbox" required />
+            <span
+              >Bilgilerimin teklif süreci için işlenmesini kabul ediyorum.</span
+            >
+          </label>
           <button type="submit" class="btn-submit">
-            <i class="fab fa-whatsapp"></i> Teklif İste →
+            <span class="btn-submit-text"
+              ><i class="fab fa-whatsapp"></i> Teklif İste →</span
+            >
+            <span class="btn-spinner" aria-hidden="true"></span>
           </button>
-          <div class="warning">
-            <p class="messagetext"></p>
-          </div>
+          <div class="warning" role="status" aria-live="polite" hidden></div>
         </form>
       </div>
     </section>
@@ -689,7 +733,7 @@
             role="link"
             aria-label="Ana Sayfa"
           >
-            27 <span>İstanbul</span>
+            27 İstanbul
             <span style="color: var(--gold)">Asansör</span>
           </div>
           <p>
@@ -703,7 +747,7 @@
             <a href="#" class="social-link" aria-label="LinkedIn">💼</a>
             <a href="#" class="social-link" aria-label="YouTube">▶️</a>
             <a
-              href="https://wa.me/00000000000?text=Merhaba"
+              href="https://wa.me/905352681166?text=Merhaba"
               target="_blank"
               rel="noopener noreferrer"
               class="social-link"
@@ -770,15 +814,8 @@
       </a>
     </div>
     <script src="script.js"></script>
-    <a
-      href="tel:+900000000000"
-      class="floating-call-btn"
-      title="Hemen Bizi Arayın"
-    >
-      <div class="phone-holder">
-        <i class="fas fa-phone-alt"></i>
-      </div>
-      <span>Hemen Arayınız</span>
-    </a>
+  </body>
+</html>
+
   </body>
 </html>

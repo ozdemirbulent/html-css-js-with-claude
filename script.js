@@ -124,7 +124,18 @@
 /* ── 1. SCROLL TOP BTN ──────────────────────────────────────*/
 const scrollTopBtn = document.getElementById("scrollTopBtn");
 window.addEventListener("scroll", function () {
-  scrollTopBtn.style.display = window.scrollY > 300 ? "block" : "none";
+  const scrollTop = window.scrollY;
+  const docHeight = Math.max(1, document.documentElement.scrollHeight - document.documentElement.clientHeight);
+  const scrollPercent = scrollTop / docHeight;
+  
+  if (scrollTopBtn) {
+    scrollTopBtn.style.setProperty('--scroll-value', `${scrollPercent * 100}%`);
+    if (scrollTop > 300) {
+      scrollTopBtn.classList.add("show");
+    } else {
+      scrollTopBtn.classList.remove("show");
+    }
+  }
 });
 scrollTopBtn.addEventListener("click", function () {
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -257,33 +268,81 @@ const statsObserver = new IntersectionObserver(
   { threshold: 0.5 },
 );
 if (statsBar) statsObserver.observe(statsBar);
-const WHATSAPP_NUMBER = "900000000000";
+const WHATSAPP_NUMBER = "905352681166";
 
 const contactForm = document.getElementById("contactForm");
 const warningMessage = document.querySelector(".warning");
+const phoneInput = document.getElementById("f-tel");
 
 if (contactForm) {
   contactForm.addEventListener("submit", handleSubmit);
+}
+
+if (phoneInput) {
+  phoneInput.addEventListener("input", (e) => {
+    e.target.value = e.target.value.replace(/\D/g, "").slice(0, 11);
+  });
+}
+
+let formMessageTimer = null;
+
+function clearFormMessage() {
+  if (!warningMessage) return;
+  clearTimeout(formMessageTimer);
+  formMessageTimer = null;
+  warningMessage.hidden = true;
+  warningMessage.textContent = "";
+  warningMessage.removeAttribute("data-type");
+}
+
+/** type: 'error' | 'success' | '' — autoHideMs: ms sonra gizle (0 = kalıcı, sadece loading vb.) */
+function setFormMessage(message, type, autoHideMs) {
+  if (!warningMessage) return;
+  clearTimeout(formMessageTimer);
+  formMessageTimer = null;
+
+  if (!message) {
+    clearFormMessage();
+    return;
+  }
+
+  warningMessage.textContent = message;
+  warningMessage.hidden = false;
+  if (type) warningMessage.dataset.type = type;
+  else warningMessage.removeAttribute("data-type");
+
+  let ms = autoHideMs;
+  if (ms === undefined) {
+    ms = type === "error" || type === "success" ? 4500 : 0;
+  }
+  if (ms > 0) {
+    formMessageTimer = setTimeout(clearFormMessage, ms);
+  }
 }
 
 function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
   const adSoyad = form.querySelector("#f-ad").value.trim();
-  const telefon = form.querySelector("#f-tel").value.trim();
+  const telefon = form.querySelector("#f-tel").value.replace(/\D/g, "").trim();
   const eposta = form.querySelector("#f-mail").value.trim();
   const hizmet = form.querySelector("#f-hizmet").value;
   const mesaj = form.querySelector("#f-mesaj").value.trim();
   const btn = form.querySelector(".btn-submit");
+  const consent = form.querySelector("#f-consent").checked;
 
-  if (!adSoyad || !telefon || !hizmet || !mesaj) {
-    if (warningMessage) {
-      warningMessage.style.display = "block";
-      warningMessage.textContent = "Lütfen tüm alanları doldurun.";
-      setTimeout(() => {
-        warningMessage.style.display = "none";
-      },2500);
-    }
+  if (!adSoyad || !telefon || !eposta || !hizmet || !mesaj) {
+    setFormMessage("Lütfen tüm zorunlu alanları doldurun.", "error");
+    return;
+  }
+
+  if (telefon.length < 10) {
+    setFormMessage("Telefon numarası en az 10 haneli olmalı.", "error");
+    return;
+  }
+
+  if (!consent) {
+    setFormMessage("Devam etmek için KVKK onay kutusunu işaretleyin.", "error");
     return;
   }
 
@@ -297,9 +356,9 @@ function handleSubmit(e) {
     `💬 *Mesaj:* ${mesaj || "-"}`,
   ].join("\n");
 
-  btn.textContent = "✓ WhatsApp Açılıyor...";
-  btn.style.background = "#25d366";
-  btn.style.color = "#fff";
+  btn.disabled = true;
+  btn.classList.add("loading");
+  clearFormMessage();
 
   setTimeout(() => {
     window.open(
@@ -307,11 +366,14 @@ function handleSubmit(e) {
       "_blank",
     );
     setTimeout(() => {
-      btn.textContent = "Teklif İste →";
-      btn.style.background = "";
-      btn.style.color = "";
+      btn.classList.remove("loading");
       btn.disabled = false;
       form.reset();
+      setFormMessage(
+        "Talebiniz alındı. WhatsApp penceresinden gönderimi tamamlayın.",
+        "success",
+        4500,
+      );
     }, 2000);
   }, 500);
 }
