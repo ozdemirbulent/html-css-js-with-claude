@@ -332,6 +332,12 @@ nav.scrolled {
   letter-spacing: 1.4px;
   text-transform: uppercase;
   padding: 8px 12px;
+  cursor: pointer;
+}
+.trust-pill:hover {
+  color: white;
+  border-color: var(--gold);
+  transform: translateY(-2px);
 }
 
 .btn-gold {
@@ -892,7 +898,7 @@ footer {
 
 .logo-footer {
   height: 75px;
-  width: 100px;
+  width: auto;
   object-fit: contain;
   opacity: 0.85;
   transition: all 0.3s ease;
@@ -901,7 +907,7 @@ footer {
 
 .logo-footer:hover {
   opacity: 1;
-  transform: scale(1.05);
+  transform: scale(1.15);
 }
 
 .footer-bottom p {
@@ -1630,11 +1636,13 @@ iframe {
 
   .footer-bottom {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
   }
 
   .footer-cert {
+    justify-content: center;
     gap: 10px;
   }
 
@@ -1694,10 +1702,12 @@ iframe {
   .trust-pill {
     font-size: 0.66rem;
     padding: 7px 10px;
+    letter-spacing: 2px;
+    cursor: pointer;
   }
 
   .logo-footer {
-    height: 46px;
+    height: 55px;
   }
 
   .quick-contact-bar {
@@ -1783,7 +1793,7 @@ iframe {
   }
 
   .logo-footer {
-    height: 38px;
+    height: 45px;
   }
 
   .hero-desc {
